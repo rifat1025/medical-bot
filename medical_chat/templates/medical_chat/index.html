@@ -1,0 +1,33 @@
+<!-- chat/templates/chat/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medical Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        input[type="text"] { width: 400px; padding: 8px; }
+        button { padding: 8px 12px; }
+        .chat { border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; border-radius: 8px; }
+        .user { color: #1a73e8; font-weight: bold; }
+        .bot { color: #333; }
+    </style>
+</head>
+<body>
+    <h1>Medical Chatbot</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="question" placeholder="Ask a medical question" required>
+        <button type="submit">Ask</button>
+    </form>
+
+    <h2>Chat History:</h2>
+    {% for q, a in chat_history %}
+        <div class="chat">
+            <p class="user">You: {{ q }}</p>
+            <p class="bot">Bot: {{ a }}</p>
+        </div>
+    {% endfor %}
+</body>
+</html>
